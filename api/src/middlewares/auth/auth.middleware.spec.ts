@@ -24,37 +24,37 @@ describe('AuthMiddleware', () => {
     nextFunction = jest.fn();
   });
 
-  it('should throw UnauthorizedException if authorization header is missing', () => {
+  it('should throw UnauthorizedException if authorization header is missing', async () => {
     mockRequest = {
       headers: {},
     };
 
-    expect(() =>
+    await expect(
       authMiddleware.use(
         mockRequest as Request,
         mockResponse as Response,
         nextFunction,
       ),
-    ).toThrow(UnauthorizedException);
+    ).rejects.toThrow(UnauthorizedException);
   });
 
-  it('should throw UnauthorizedException if token is not provided', () => {
+  it('should throw UnauthorizedException if token is not provided', async () => {
     mockRequest = {
       headers: {
         authorization: 'Bearer ',
       },
     };
 
-    expect(() =>
+    await expect(
       authMiddleware.use(
         mockRequest as Request,
         mockResponse as Response,
         nextFunction,
       ),
-    ).toThrow(UnauthorizedException);
+    ).rejects.toThrow(UnauthorizedException);
   });
 
-  it('should throw UnauthorizedException if token is invalid', () => {
+  it('should throw UnauthorizedException if token is invalid', async () => {
     mockRequest = {
       headers: {
         authorization: 'Bearer invalid.token.here',
@@ -65,13 +65,13 @@ describe('AuthMiddleware', () => {
       throw new Error('Invalid token');
     });
 
-    expect(() =>
+    await expect(
       authMiddleware.use(
         mockRequest as Request,
         mockResponse as Response,
         nextFunction,
       ),
-    ).toThrow(UnauthorizedException);
+    ).rejects.toThrow(UnauthorizedException);
   });
 
   it('should call next() if token is valid', async () => {
@@ -82,6 +82,7 @@ describe('AuthMiddleware', () => {
       password: 'hashedPassword123',
       admin: false,
     };
+
     mockRequest = {
       headers: {
         authorization: 'Bearer valid.token.here',
@@ -98,6 +99,6 @@ describe('AuthMiddleware', () => {
     );
 
     expect(nextFunction).toHaveBeenCalled();
-    expect(mockRequest['user']).toEqual(user);
+    expect(mockRequest.user).toEqual(user);
   });
 });
