@@ -1,4 +1,4 @@
-import { User } from '../../src/interfaces/user.interface'; // Adjust the import according to your project structure
+import { User } from '../../src/interfaces/user.interface';
 
 declare global {
   namespace Express {

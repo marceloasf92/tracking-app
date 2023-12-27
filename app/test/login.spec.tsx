@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import LoginForm from "../src/components/organisms/loginForm";
-import { Providers } from "../src/app/providers"; //
+import { Providers } from "../src/app/providers";
 import Login from "../src/app/page";
 
 jest.mock("next/navigation", () => ({

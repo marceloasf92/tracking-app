@@ -19,7 +19,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../app/store";
 import { logout } from "../features/user/userSlice";
 import { useRouter } from "next/navigation";
-import CustomButton from "../components/atoms/customButton"; // Importe o CustomButton
+import CustomButton from "../components/atoms/customButton";
 
 export default function Nav() {
   const username = useSelector((state: RootState) => state.user.username);
