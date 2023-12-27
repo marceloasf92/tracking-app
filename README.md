@@ -59,7 +59,7 @@ docker exec -it backend-app-1 yarn prisma migrate dev --name init
 ### Usuários (Users)
 
 - **GET /users**: Lista todos os usuários.
-- **GET /users/**:id: Busca um usuário pelo ID.
+- **GET /users/:id**: Busca um usuário pelo ID.
 - **POST /users**: Cria um novo usuário.
 - **PUT /users/:id**: Atualiza um usuário existente.
 - **DELETE /users/:id**: Remove um usuário.
