@@ -1,4 +1,9 @@
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import {
+  Module,
+  NestModule,
+  MiddlewareConsumer,
+  RequestMethod,
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
@@ -9,6 +14,7 @@ import { AuthMiddleware } from './middlewares/auth/auth.middleware';
 import { OrdersController } from './modules/orders/orders.controller';
 import { APP_FILTER } from '@nestjs/core';
 import { GlobalExceptionFilter } from './common/global-exception.filter';
+import { IsAdminMiddleware } from './middlewares/admin/isAdmin.middleware';
 
 @Module({
   imports: [UsersModule, PrismaModule, OrdersModule, LoginModule],
@@ -24,5 +30,8 @@ import { GlobalExceptionFilter } from './common/global-exception.filter';
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(AuthMiddleware).forRoutes(OrdersController);
+    consumer
+      .apply(IsAdminMiddleware)
+      .forRoutes({ path: 'orders', method: RequestMethod.POST });
   }
 }

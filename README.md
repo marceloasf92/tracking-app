@@ -1,4 +1,4 @@
-# Projeto Tracking App
+# MVP Tracking App
 
 ## Sobre o Projeto
 
@@ -85,3 +85,44 @@ docker exec -it backend-app-1 yarn prisma migrate dev --name init
 ## Recomendações
 
 Siga as instruções de configuração para inicializar corretamente a aplicação. Consulte a documentação das tecnologias utilizadas para melhor entendimento e personalização.
+
+### Nota Importante sobre a Funcionalidade do MVP
+
+Por favor, estejam cientes de que, no MVP inicial desta aplicação, as funcionalidades de criação de pedidos e usuários estão disponíveis exclusivamente através de chamadas diretas à API. Essas funcionalidades ainda não foram implementadas na interface do frontend. Esta decisão foi tomada para priorizar o desenvolvimento do backend e garantir uma funcionalidade robusta da API nas primeiras etapas do projeto.
+
+Criação do usuário:
+
+- **POST /users**: [http://localhost:3001/users/](http://localhost:3001/users/)
+```json
+{
+    "name": "Teste",
+    "email": "teste@mail.com",
+    "password": "senha123"
+}
+```
+
+Criação do pedido:
+
+- **POST /orders**: [http://localhost:3001/orders](http://localhost:3001/orders)
+```json
+{
+    "customerName": "Teste",
+    "deliveryAddress": "Rua Teste",
+    "status": "Em andamento",
+    "userId": 1
+}
+```
+
+Login do usuário:
+
+- **POST /login**: [http://localhost:3001/login](http://localhost:3001/login)
+```json
+{
+  "email": "teste@mail.com",
+  "password": "senha123"
+}
+```
+
+## IMPORTANTE
+
+Para conseguir adicionar um pedido é necessário estar logado na aplicação e ser um user ADMIN (usuário deve ser alterado pelo banco de dados).
