@@ -3,7 +3,7 @@ import { LoginService } from './login.service';
 import { PrismaService } from '../prisma/prisma.service';
 import { UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 
 jest.mock('bcryptjs', () => ({
   ...jest.requireActual('bcryptjs'),
